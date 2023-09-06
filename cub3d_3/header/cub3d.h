@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 01:57:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 19:33:33 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/06 22:53:54 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,6 @@
 # define EA 4
 # define WE 5
 
-typedef struct s_line
-{
-	struct s_node	*next;
-	struct s_node	*prev;
-	char			*line;
-	int				width;
-}	t_line;
-
-typedef struct s_map_info
-{
-	int		max_width;
-	int		row;
-	t_line	*head;
-	t_line	*tail;
-}	t_map_info;
 
 typedef struct s_img
 {
@@ -57,6 +42,7 @@ typedef struct s_img
 typedef struct s_game
 {
 	char		*map;
+	char		**map_copy;
 	int			height;
 	int			width;
 	int			player_count;
@@ -64,7 +50,6 @@ typedef struct s_game
 	t_img		*img;
 	void		*mlx;
 	void		*mlx_win;
-	t_map_info	*map_info;
 }	t_game;
 
 char	*no_new_line(char *line);

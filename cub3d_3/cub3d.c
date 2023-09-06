@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:14:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 21:08:38 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/06 23:07:56 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ int	check_argv(char *argv)
 
 void	init_game(t_game *game, char *file)
 {
-	t_map_info	*tmp;
-
 	game->map = NULL;
+	game->map_copy = NULL;
 	game->height = 0;
 	game->width = 0;
 	game->player_count = 0;
@@ -47,12 +46,6 @@ void	init_game(t_game *game, char *file)
 	// game->img->img_we = NULL;
 	// game->img->img_ea = NULL;
 	game->mlx = mlx_init();
-	tmp = (t_map_info *)malloc(sizeof(t_map_info));
-	tmp->max_width = 0;
-	tmp->row = 0;
-	tmp->head = NULL;
-	tmp->tail = NULL;
-	game->map_info = tmp;
 }
 
 void	check(void)
@@ -75,29 +68,26 @@ int	main(int argc, char **argv)
 	init_game(&game, argv[1]);
 	//4. gnl
 	read_map(&game);
-
 	//잘 들어왔는지 출력
-	printf("%s", game.map);
+	//printf("%s", game.map);
+	// //exit(0);
 	printf("player : %d\n",game.player_count);
 	for (int i = 0; i < 3; i++)
 		printf("ceil : %d\n" ,game.img->ceil[i]);
 	for (int i = 0; i < 3; i++)
 		printf("floor : %d\n" ,game.img->floor[i]);
-		
-	printf("game->tmp->row : %d\n", game.map_info->row);
 	//5.맵 유효성 검사
-	//check_map(&game);
+	check_map(&game);
 
 	//릭은 일단 나중에
+	//free(game.map);
 	free(game.img->img_ea);
 	free(game.img->img_no);
 	free(game.img->img_so);
 	free(game.img->img_we);
 	free(game.img);
 	free(game.mlx);
-	free(game.map);
-	//map free && map->node free
-	free(game.map_info);
+
 	exit(0);
 
 }

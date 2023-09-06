@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:15:13 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 18:03:07 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/06 23:19:11 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*no_new_line(char *line)
 	int		i;
 	char	*no_newline;
 
+	if (!line)
+		return (NULL);
 	no_newline = malloc(sizeof(char) * (str_length(line) - 1));
 	i = 0;
 	while (line[i])
@@ -66,22 +68,30 @@ void	check_direction(char *line, t_game *game, int *count)
 {
 	char	**temp;
 	int		temp_string;
+	char	*new_line;
 
+	new_line = NULL;
 	temp = split_string(line, ' ');
 	if (!temp)
 		error("direction Error1\n");
 	temp_string = 0;
 	while (temp[temp_string])
+	{
+		printf("temp : %s\n", temp[temp_string]);
 		temp_string++;
+	}
+	if (temp_string == 2)
+		new_line = no_new_line(temp[1]);
 	if (!(str_n_compare(temp[0], "NO", 2)) && temp_string == 2)
-		put_img(count, game, temp[1], NO);
+		put_img(count, game, new_line, NO);
 	else if (!(str_n_compare(temp[0], "SO", 2)) && temp_string == 2)
-		put_img(count, game, temp[1], SO);
+		put_img(count, game, new_line, SO);
 	else if (!(str_n_compare(temp[0], "WE", 2)) && temp_string == 2)
-		put_img(count, game, temp[1], EA);
+		put_img(count, game, new_line, EA);
 	else if (!(str_n_compare(temp[0], "EA", 2)) && temp_string == 2)
-		put_img(count, game, temp[1], WE);
+		put_img(count, game, new_line, WE);
 	else
 		error("direction Error\n");
 	char_two_free(temp);
+	free(new_line);
 }
