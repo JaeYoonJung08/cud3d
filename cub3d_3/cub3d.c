@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:14:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 19:34:01 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/06 21:08:38 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,17 @@ int	main(int argc, char **argv)
 	read_map(&game);
 
 	//잘 들어왔는지 출력
-	// printf("map : %s\n", game.map);
-	// printf("player : %d\n",game.player_count);
-	// for (int i = 0; i < 3; i++)
-	// 	printf("ceil : %d\n" ,game.img->ceil[i]);
-	// for (int i = 0; i < 3; i++)
-	// 	printf("floor : %d\n" ,game.img->floor[i]);
+	printf("%s", game.map);
+	printf("player : %d\n",game.player_count);
+	for (int i = 0; i < 3; i++)
+		printf("ceil : %d\n" ,game.img->ceil[i]);
+	for (int i = 0; i < 3; i++)
+		printf("floor : %d\n" ,game.img->floor[i]);
 		
 	printf("game->tmp->row : %d\n", game.map_info->row);
-
 	//5.맵 유효성 검사
-	check_map(&game);
+	//check_map(&game);
+
 	//릭은 일단 나중에
 	free(game.img->img_ea);
 	free(game.img->img_no);
@@ -96,6 +96,7 @@ int	main(int argc, char **argv)
 	free(game.img);
 	free(game.mlx);
 	free(game.map);
+	//map free && map->node free
 	free(game.map_info);
 	exit(0);
 

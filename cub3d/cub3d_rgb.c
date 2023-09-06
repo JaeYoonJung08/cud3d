@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:57:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/05 02:12:15 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/05 22:00:39 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	check_rgb_invalid(char *temp)
 	i = 0;
 	while (temp[i])
 	{
-		if (!(temp[i] == ',' && (temp[i] >= '0' && temp[i] <= '9')))
-			error("Error\n");
+		if (!(temp[i] == ',' || (temp[i] >= '0' && temp[i] <= '9') ||
+			temp[i] == '\n'))
+			error("rgb_invalid_Erro1r\n");
 		i++;
 	}
 }
@@ -30,23 +31,17 @@ void	check_rgb_invalid(char *temp)
 void	check_color(char **temp_split, int *array)
 {
 	int	temp_string;
-	int	i;
 
-	i = 0;
 	temp_string = 0;
-	while(temp_split[temp_string])
+	while (temp_split[temp_string])
 		temp_string++;
-	//split한 인자가 5개가 아니면 에러
-	if (temp_string != 5)
-		error("Error\n");
+	//split한 인자가 3개가 아니면 에러
+	if (temp_string != 3)
+		error("rgb_color_Error\n");
 	temp_string = 0;
 	while (temp_split[temp_string])
 	{
-		if (temp_string % 2 == 0)
-		{
-			array[i] = int_atoi(temp_split[temp_string]);
-			i++;
-		}
+		array[temp_string] = int_atoi(temp_split[temp_string]);
 		temp_string++;
 	}
 }
@@ -59,9 +54,10 @@ void	input_rgb(char *temp, int *count, int *array)
 	check_rgb_invalid(temp);
 	temp_split = split_string(temp, ',');
 	if (!temp_split)
-		error("Error\n");
+		error("rgb_input_Error\n");
 	check_color(temp_split, array);
 	(*count)++;
+	char_two_free(temp_split);
 }
 
 //rgb F와 C 체크
@@ -69,19 +65,21 @@ void	check_rgb(char *line, t_game *game, int *count)
 {
 	char	**temp;
 	int		temp_string;
+	char	*no_newline;
 
-	temp = split_string(line, ' ');
+	no_newline = no_new_line(line);
+	temp = split_string(no_newline, ' ');
 	if (!temp)
-		error("Error\n");
+		error("rgb_Error\n");
 	temp_string = 0;
 	while (temp[temp_string])
 		temp_string++;
-	if (line[0] == '\n' && !(line[1]) && temp_string == 1)
-		;
-	else if (!(str_n_compare(line, "F", 1)) && temp_string == 2)
+	if (!(str_n_compare(line, "F", 1)) && temp_string == 2)
 		input_rgb(temp[1], count, game->img->floor);
 	else if (!(str_n_compare(line, "C", 1))  && temp_string == 2)
 		input_rgb(temp[1], count, game->img->ceil);
-	else
-		error("Error\n");
+	// else
+	// 	error("rgb_Error\n");
+	char_two_free(temp);
+	free(no_newline);
 }

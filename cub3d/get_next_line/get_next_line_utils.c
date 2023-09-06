@@ -6,11 +6,13 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/06 16:31:13 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/05 20:59:40 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stdio.h>
 
 int	ft_strlen(const char *s)
 {
@@ -99,6 +101,8 @@ char	*ft_strjoin(char *s1, char *s2, int s2_len, int count)
 	temp[count + i] = '\0';
 	free(s1);
 	s1 = NULL;
+	//printf("temp : %s\n", temp);
+	//exit(1);
 	return (temp);
 }
 

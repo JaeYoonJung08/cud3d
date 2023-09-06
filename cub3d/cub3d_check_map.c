@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_error_free.c                                 :+:      :+:    :+:   */
+/*   cub3d_check_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 19:16:57 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/05 21:01:14 by jaeyojun         ###   ########seoul.kr  */
+/*   Created: 2023/09/06 18:06:20 by jaeyojun          #+#    #+#             */
+/*   Updated: 2023/09/06 18:11:36 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
 
-//에러일 때 출력해주는 함수
-void	error(const char *tmp)
+void	check_map(t_game *game)
 {
-	write(1, tmp, str_length(tmp));
-	exit(FAIL);
-}
+	char	*map_copy;
+	int		count;
 
-//2차원 free함수
-char	**char_two_free(char **word)
-{
-	int	i;
-
-	i = 0;
-	while (word[i])
+	count = 0;
+	map_copy = game->map;
+	while (*map_copy) 
 	{
-		free(word[i]);
-		i++;
+		if (*map_copy == '\n')
+		{
+			printf("DENUG\n");
+			exit(0);
+		}
 	}
-	free(word);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:03:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 18:05:13 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/06 21:08:16 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,39 @@ int	line_string_count(char *line)
 int	check_line(char *line, int line_len, t_game *game)
 {
 	int	i;
+	//int	count_newline;
 
+	//count_newline = 0;
 	i = -1;
+	//printf("line : %s", line);
 	while (++i < line_len)
 	{
-		if (line[i] == '0' || line[i] == '1')
+		if (line[i] == '0' || line[i] == '1' || line[i] == ' ' \
+			|| line[i] == '\n' || line[i] == '\t')
+		{
+			//count_newline = 1;
 			continue ;
+		}
 		else if (line[i] == 'N' || line[i] == 'S' || \
 			line[i] == 'W' || line[i] == 'E')
+		{
+			//count_newline = 1;
 			game->player_count++;
+		}
 		else
 		{
 			if (line_len - 1 == i)
+			{
 				if (line[i] != '\n')
 					error("invalid input map\n");
+			}
+			else
+				error("invalid input map1\n");
 		}
 	}
+	// printf("line : .%s", line);
+	// if (count_newline == 0 || line[0] != '\n')
+	// 	error("invalid input map1\n");
 	return (1);
 }
 
@@ -105,7 +122,8 @@ void	read_map(t_game *game)
 		{
 			if (check_line(line, str_length(line), game) == 1)
 			{
-				map_buf = ft_strjoin(map_buf, line, \
+				if (line[0] != '\n')
+					map_buf = ft_strjoin(map_buf, line, \
 					str_length(line), str_length(map_buf));
 			}
 			else
