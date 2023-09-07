@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:15:13 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 23:19:11 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/07 14:41:07 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,16 @@ void	check_direction(char *line, t_game *game, int *count)
 		error("direction Error1\n");
 	temp_string = 0;
 	while (temp[temp_string])
-	{
-		printf("temp : %s\n", temp[temp_string]);
 		temp_string++;
-	}
 	if (temp_string == 2)
 		new_line = no_new_line(temp[1]);
-	if (!(str_n_compare(temp[0], "NO", 2)) && temp_string == 2)
+	if (!(str_n_compare(temp[0], "NO", str_length(temp[0]))) && temp_string == 2)
 		put_img(count, game, new_line, NO);
-	else if (!(str_n_compare(temp[0], "SO", 2)) && temp_string == 2)
+	else if (!(str_n_compare(temp[0], "SO", str_length(temp[0]))) && temp_string == 2)
 		put_img(count, game, new_line, SO);
-	else if (!(str_n_compare(temp[0], "WE", 2)) && temp_string == 2)
+	else if (!(str_n_compare(temp[0], "WE", str_length(temp[0]))) && temp_string == 2)
 		put_img(count, game, new_line, EA);
-	else if (!(str_n_compare(temp[0], "EA", 2)) && temp_string == 2)
+	else if (!(str_n_compare(temp[0], "EA", str_length(temp[0]))) && temp_string == 2)
 		put_img(count, game, new_line, WE);
 	else
 		error("direction Error\n");

@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:06:20 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 23:04:57 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/07 18:39:41 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ char	*middle_new_line_check(char	*map)
 	return (temp);
 }
 
-// void	check_wall(char **map)
-// {
-
-// }
-
 void	check_map(t_game *game)
 {
 	char	**map_copy;
@@ -59,16 +54,12 @@ void	check_map(t_game *game)
 	location = first_new_line_delete(game->map);
 	one_copy = middle_new_line_check(game->map + location);
 	map_copy = split_string(one_copy, '\n');
-
-	int i = 0;
-	while (map_copy[i])
-	{
-		printf("%s\n", map_copy[i]);
-		i++;
-	}
-	//2차원배열에 각각 넣어줌 -> 0으로 부터 주변에 공백, 널이 있는지 검사, 위아래 양옆 전부 1인지 검사
-	//check_wall(map_copy);
+	//2차원배열에 각각 넣어줌 -> 0으로 부터 주변에 공백, 널이 있는지 검사
+	check_zero(map_copy);
+	//양옆이 벽인지 검사
+	check_wall(map_copy);
 
 	free(one_copy);
+	free(map_copy);
 	free(game->map);
 }

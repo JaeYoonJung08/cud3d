@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:03:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 23:16:12 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/07 14:42:39 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int	check_line(char *line, int line_len, t_game *game)
 void	check_dir_rgb(char *line, t_game *game, int *count)
 {
 	char	**temp;
-	//char	*no_newline;
 
-	//no_newline = no_new_line(line);
 	temp = split_string(line, ' ');
 	if (!temp)
 		error("direction Error1\n");
@@ -71,20 +69,15 @@ void	check_dir_rgb(char *line, t_game *game, int *count)
 	}
 	else if (!(str_n_compare(temp[0], "F", 1)) || \
 		!(str_n_compare(temp[0], "C", 1)))
-	{
 		check_rgb(line, game, count);
-	}
 	else if (!(str_n_compare(temp[0], "NO", 2)) || \
 		!(str_n_compare(temp[0], "SO", 2)) || \
 		!(str_n_compare(temp[0], "WE", 2)) || \
 		!(str_n_compare(temp[0], "EA", 2)))
-		{//printf("DN1\n");
 		check_direction(line, game, count);
-		}
 	else
 		error("check_dir_rgb_Error\n");
 	char_two_free(temp);
-	//free(no_newline);
 }
 
 int	check_space(char *line)
@@ -131,10 +124,7 @@ void	read_map(t_game *game)
 		if (!line)
 			break ;
 		if (count <= 5)
-		{
-			//printf("DN\n");
 			check_dir_rgb(line, game, &count);
-		}
 		else
 		{
 			if (check_line(line, str_length(line), game) == 1)

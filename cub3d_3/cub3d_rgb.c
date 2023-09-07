@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:57:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 23:12:33 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/07 14:40:36 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,26 @@ void	check_rgb(char *line, t_game *game, int *count)
 {
 	char	**temp;
 	int		temp_string;
-	char	*no_newline;
+	char	*new_line;
 
-	no_newline = no_new_line(line);
-	temp = split_string(no_newline, ' ');
+	new_line = NULL;
+	temp = split_string(line, ' ');
 	if (!temp)
 		error("rgb_Error\n");
 	temp_string = 0;
 	while (temp[temp_string])
+	{
+		printf("temp : %s\n" , temp[temp_string]);
 		temp_string++;
-	if (!(str_n_compare(line, "F", 1)) && temp_string == 2)
-		input_rgb(temp[1], count, game->img->floor);
-	else if (!(str_n_compare(line, "C", 1))  && temp_string == 2)
-		input_rgb(temp[1], count, game->img->ceil);
-	// else
-	// 	error("rgb_Error\n");
+	}
+	if (temp_string == 2)
+		new_line = no_new_line(temp[1]);
+	if (!(str_n_compare(temp[0], "F", str_length(temp[0]))) && temp_string == 2)
+		input_rgb(new_line, count, game->img->floor);
+	else if (!(str_n_compare(temp[0], "C", str_length(temp[0]))) && temp_string == 2)
+		input_rgb(new_line, count, game->img->ceil);
+	else
+		error("rgb_Error\n");
 	char_two_free(temp);
-	free(no_newline);
+	free(new_line);
 }

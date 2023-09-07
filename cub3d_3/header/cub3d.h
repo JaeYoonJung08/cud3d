@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 01:57:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 22:53:54 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/07 18:42:31 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define SO 3
 # define EA 4
 # define WE 5
-
 
 typedef struct s_img
 {
@@ -87,4 +86,9 @@ long	atoi_while(char *str);
 int		int_atoi(char *str);
 
 void	check_map(t_game *game);
+
+void	check_zero(char **map);
+void	check_wall(char **map);
+int		strend_line_check(char *map);
+void	startend_one_check(char *map);
 #endif
