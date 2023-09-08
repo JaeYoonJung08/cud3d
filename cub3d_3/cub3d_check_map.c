@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:06:20 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/07 18:39:41 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/08 14:24:00 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,13 @@ void	check_map(t_game *game)
 	char	**map_copy;
 	long	location;
 	char	*one_copy;
+	int		hei;
 
+	hei = 0;
+	//player가 2이상 있을 때  에러
+	if (game->player_count >= 2)
+		error("play_direction error\n");
+	//연속으로 개행있는지 체크
 	location = first_new_line_delete(game->map);
 	one_copy = middle_new_line_check(game->map + location);
 	map_copy = split_string(one_copy, '\n');
@@ -58,8 +64,10 @@ void	check_map(t_game *game)
 	check_zero(map_copy);
 	//양옆이 벽인지 검사
 	check_wall(map_copy);
-
+	game->map_copy = map_copy;
+	while (game->map_copy[hei])
+		hei++;
+	game->height = hei;
 	free(one_copy);
-	free(map_copy);
 	free(game->map);
 }

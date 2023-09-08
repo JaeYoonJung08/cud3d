@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:14:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 23:07:56 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/08 14:23:55 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 {
 	t_game		game;
 
-	//atexit(check);
+	atexit(check);
 	//1. argc 2가 아닐 때 에라
 	if (argc != 2)
 		error("Error\n");
@@ -68,19 +68,22 @@ int	main(int argc, char **argv)
 	init_game(&game, argv[1]);
 	//4. gnl
 	read_map(&game);
-	//잘 들어왔는지 출력
-	//printf("%s", game.map);
-	// //exit(0);
+	//5.맵 유효성 검사
+	check_map(&game);
+	
 	printf("player : %d\n",game.player_count);
 	for (int i = 0; i < 3; i++)
 		printf("ceil : %d\n" ,game.img->ceil[i]);
 	for (int i = 0; i < 3; i++)
 		printf("floor : %d\n" ,game.img->floor[i]);
-	//5.맵 유효성 검사
-	check_map(&game);
-
+	int j = 0;
+	while (game.map_copy[j])
+	{
+		printf("%s\n", game.map_copy[j]);
+		j++;
+	}
 	//릭은 일단 나중에
-	//free(game.map);
+	char_two_free(game.map_copy);
 	free(game.img->img_ea);
 	free(game.img->img_no);
 	free(game.img->img_so);
