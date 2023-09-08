@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:03:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/08 21:59:46 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/08 22:35:43 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	read_map(t_game *game)
 		{
 			if (check_line(line, str_length(line), game) == 1)
 			{
-				if (check_space(no_new_line(line)) == 1)
+				//if (check_space(no_new_line(line)) == 1)
 					map_buf = ft_strjoin(map_buf, line, \
 					str_length(line), str_length(map_buf));
 			}
