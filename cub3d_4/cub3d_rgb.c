@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:57:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/07 14:40:36 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 17:16:16 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,32 @@ void	check_color(char **temp_split, int *array)
 //rgb ,와 숫자인지 검사 한 후 rgb 값 넣어주기
 void	input_rgb(char *temp, int *count, int *array)
 {
-	char	**temp_split;
+	char	**comma_split;
+	//char	**space_split;
+	int		comma;
+	int		i;
 
+	i = 0;
+	comma = 0;
+	while (temp[i])
+	{
+		if (temp[i] == ',')
+			comma++;
+		i++;
+	}
+	if (comma >= 3)
+		error("comma error\n");
 	check_rgb_invalid(temp);
-	temp_split = split_string(temp, ',');
-	if (!temp_split)
+	comma_split = split_string(temp, ',');
+	if (!comma_split)
 		error("rgb_input_Error\n");
-	check_color(temp_split, array);
+	// space_split = split_string(comma_split, ',');
+	// if (!space_split)
+	// 	error("rgb_input_Error\n");
+	check_color(comma_split, array);
 	(*count)++;
-	char_two_free(temp_split);
+	char_two_free(comma_split);
+	//char_two_free(space_split);
 }
 
 //rgb F와 C 체크

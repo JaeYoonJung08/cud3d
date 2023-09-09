@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:15:13 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/07 14:41:07 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 21:58:04 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*no_new_line(char *line)
 
 	if (!line)
 		return (NULL);
-	no_newline = malloc(sizeof(char) * (str_length(line) - 1));
+	no_newline = (char *)malloc(sizeof(char) * (str_length(line)));
 	i = 0;
 	while (line[i])
 	{
@@ -36,33 +36,57 @@ void	put_img(int *count, t_game *game, char *temp, int flag)
 {
 	int		wid;
 	int		hei;
+	char	*copy;
+	
+	copy = ft_strdup(temp);
 
 	if (flag == NO)
 	{
 		game->img->img_no = mlx_xpm_file_to_image(game->mlx, temp, &wid, &hei);
 		if (!(game->img->img_no))
 			error("put_img_Error1\n");
+		game->img->img_no_name = copy;
 	}
 	else if (flag == SO)
 	{
 		game->img->img_so = mlx_xpm_file_to_image(game->mlx, temp, &wid, &hei);
 		if (!(game->img->img_so))
 			error("put_img_Error2\n");
+		game->img->img_so_name = copy;
 	}
 	else if (flag == EA)
 	{
 		game->img->img_ea = mlx_xpm_file_to_image(game->mlx, temp, &wid, &hei);
 		if (!(game->img->img_ea))
 			error("put_img_Erro3\n");
+		game->img->img_we_name = copy;
 	}
 	else if (flag == WE)
 	{
 		game->img->img_we = mlx_xpm_file_to_image(game->mlx, temp, &wid, &hei);
 		if (!(game->img->img_we))
 			error("put_img_Error4\n");
+		game->img->img_ea_name = copy;
 	}
 	(*count)++;
 }
+
+void	check_extension(char *file)
+{
+	int	length;
+
+	length = str_length(file);
+	if (length <= 4)
+		error("extension error\n");
+	if (!(file[length - 1] == 'm' && file[length - 2] == 'p' \
+		&& file[length - 3] == 'x' && file[length - 4] == '.'))
+		error("extesion error\n");
+}
+
+// void	check_overlap_direction(t_game *game)
+// {
+	
+// }
 
 void	check_direction(char *line, t_game *game, int *count)
 {
@@ -78,7 +102,12 @@ void	check_direction(char *line, t_game *game, int *count)
 	while (temp[temp_string])
 		temp_string++;
 	if (temp_string == 2)
+	{
 		new_line = no_new_line(temp[1]);
+		check_extension(new_line);
+	}
+	//중복 검사
+	//check_overlap_direction(&game, );
 	if (!(str_n_compare(temp[0], "NO", str_length(temp[0]))) && temp_string == 2)
 		put_img(count, game, new_line, NO);
 	else if (!(str_n_compare(temp[0], "SO", str_length(temp[0]))) && temp_string == 2)

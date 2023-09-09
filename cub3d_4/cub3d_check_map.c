@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:06:20 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/08 22:40:52 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 16:01:48 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*middle_new_line_check(char	*map)
 	while (temp[j])
 	{
 		if (temp[j] == '\n')
-			if (temp[j + 1] == '\n' && temp[j] != '\0')
+			if (temp[j + 1] == '\n' && temp[j] != '\0' && temp[j + 1])
 				error("fuck\n");
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 01:57:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/08 22:40:12 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 22:04:00 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@
 typedef struct s_img
 {
 	void	*img_no;
+	char	*img_no_name;
 	void	*img_so;
+	char	*img_so_name;
 	void	*img_we;
+	char	*img_we_name;
 	void	*img_ea;
+	char	*img_ea_name;
 	int		ceil[3];
 	int		floor[3];
 }	t_img;
@@ -84,6 +88,8 @@ int		str_length(char const *str);
 int		str_n_compare(const char *str1, const char *str2, size_t n);
 long	atoi_while(char *str);
 int		int_atoi(char *str);
+
+void	check_overlap(t_game *game);
 
 void	check_map(t_game *game);
 

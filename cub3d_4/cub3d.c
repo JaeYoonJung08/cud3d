@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:14:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/08 17:29:30 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/09 22:00:47 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,21 @@ void	init_game(t_game *game, char *file)
 		exit(1);
 	}
 	game->img = (t_img *)malloc(sizeof(t_img));
+	if (!game->img)
+		error("img error\n");
 	// game->img->img_no = NULL;
 	// game->img->img_so = NULL;
 	// game->img->img_we = NULL;
 	// game->img->img_ea = NULL;
+	game->img->img_no_name = NULL;
+	game->img->img_so_name = NULL;
+	game->img->img_we_name = NULL;
+	game->img->img_ea_name = NULL;
 	game->mlx = mlx_init();
+	if (!(game->mlx))
+		error("mlx error\n");
 }
+
 
 void	check(void)
 {
@@ -57,7 +66,7 @@ int	main(int argc, char **argv)
 {
 	t_game		game;
 
-	//atexit(check);
+	atexit(check);
 	//1. argc 2가 아닐 때 에라
 	if (argc != 2)
 		error("Error\n");
@@ -70,27 +79,27 @@ int	main(int argc, char **argv)
 	read_map(&game);
 	//5.맵 유효성 검사
 	check_map(&game);
-	
-	printf("player : %d\n",game.player_count);
-	for (int i = 0; i < 3; i++)
-		printf("ceil : %d\n" ,game.img->ceil[i]);
-	for (int i = 0; i < 3; i++)
-		printf("floor : %d\n" ,game.img->floor[i]);
-	int j = 0;
-	while (game.map_copy[j])
-	{
-		printf("%s\n", game.map_copy[j]);
-		j++;
-	}
+	printf("dEBN\n");
+	//6.rgb, direction 중복 검검사사
+	check_overlap(&game);
+	// printf("player : %d\n",game.player_count);
+	// for (int i = 0; i < 3; i++)
+	// 	printf("ceil : %d\n" ,game.img->ceil[i]);
+	// for (int i = 0; i < 3; i++)
+	// 	printf("floor : %d\n" ,game.img->floor[i]);
+	// int j = 0;
+	// while (game.map_copy[j])
+	// {
+	// 	printf("%s\n", game.map_copy[j]);
+	// 	j++;
+	// }
 	//릭은 일단 나중에
-	char_two_free(game.map_copy);
-	free(game.img->img_ea);
-	free(game.img->img_no);
-	free(game.img->img_so);
-	free(game.img->img_we);
-	free(game.img);
-	free(game.mlx);
-
+	//char_two_free(game.map_copy);
+	// free(game.img->img_ea);
+	// free(game.img->img_no);
+	// free(game.img->img_so);
+	// free(game.img->img_we);
+	// free(game.img);
+	// free(game.mlx);
 	exit(0);
-
 }
