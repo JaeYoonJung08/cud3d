@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:57:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/09 17:16:16 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 16:46:38 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_color(char **temp_split, int *array)
 }
 
 //rgb ,와 숫자인지 검사 한 후 rgb 값 넣어주기
-void	input_rgb(char *temp, int *count, int *array)
+void	input_rgb(char *temp, int *count, int *array, int *check)
 {
 	char	**comma_split;
 	//char	**space_split;
@@ -75,6 +75,7 @@ void	input_rgb(char *temp, int *count, int *array)
 	(*count)++;
 	char_two_free(comma_split);
 	//char_two_free(space_split);
+	*check = 1;
 }
 
 //rgb F와 C 체크
@@ -96,10 +97,10 @@ void	check_rgb(char *line, t_game *game, int *count)
 	}
 	if (temp_string == 2)
 		new_line = no_new_line(temp[1]);
-	if (!(str_n_compare(temp[0], "F", str_length(temp[0]))) && temp_string == 2)
-		input_rgb(new_line, count, game->img->floor);
-	else if (!(str_n_compare(temp[0], "C", str_length(temp[0]))) && temp_string == 2)
-		input_rgb(new_line, count, game->img->ceil);
+	if (!(str_n_compare(temp[0], "F", str_length(temp[0]))) && temp_string == 2 && game->img->floor_flag == 0)
+		input_rgb(new_line, count, game->img->floor, &(game->img->floor_flag));
+	else if (!(str_n_compare(temp[0], "C", str_length(temp[0]))) && temp_string == 2 && game->img->ceil_flag == 0)
+		input_rgb(new_line, count, game->img->ceil, &(game->img->ceil_flag));
 	else
 		error("rgb_Error\n");
 	char_two_free(temp);

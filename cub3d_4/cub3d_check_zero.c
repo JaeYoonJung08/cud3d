@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 18:39:23 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/07 18:42:39 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 16:03:51 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	check_zero(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] = 'W' || map[i][j] == 'E')
+			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 				ensw_diagonal_check(map, i, j);
 			j++;
 		}

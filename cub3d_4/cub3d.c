@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:14:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/09 22:00:47 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 16:31:50 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_game(t_game *game, char *file)
 	game->height = 0;
 	game->width = 0;
 	game->player_count = 0;
+
 	game->fd = open(file, O_RDONLY);
 	if (game->fd < 0)
 	{
@@ -51,6 +52,8 @@ void	init_game(t_game *game, char *file)
 	game->img->img_so_name = NULL;
 	game->img->img_we_name = NULL;
 	game->img->img_ea_name = NULL;
+	game->img->ceil_flag = 0;
+	game->img->floor_flag = 0;
 	game->mlx = mlx_init();
 	if (!(game->mlx))
 		error("mlx error\n");
@@ -78,8 +81,8 @@ int	main(int argc, char **argv)
 	//4. gnl
 	read_map(&game);
 	//빈 파일 검사
-	if (game->map == (void *)0)
-		error ("map error\n");
+	if (game.map == (void *)0)
+		error("map error\n");
 	//5.맵 유효성 검사
 	check_map(&game);
 	printf("dEBN\n");

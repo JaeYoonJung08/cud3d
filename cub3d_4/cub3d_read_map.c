@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:03:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/08 22:35:43 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 16:22:25 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,19 @@ int	check_line(char *line, int line_len, t_game *game)
 			if (line_len - 1 == i)
 			{
 				if (line[i] != '\n')
-					error("invalid input map\n");
+				{
+					// free(line);
+					// error("invalid input map\n");
+					return (0);
+
+				}
 			}
 			else
-				error("invalid input map1\n");
+			{
+				// free(line);
+				// error("invalid input map1\n");
+				return (0);
+			}
 		}
 	}
 	return (1);
@@ -138,6 +147,9 @@ void	read_map(t_game *game)
 			else
 			{
 				free(map_buf);
+				free(line);
+				map_buf = NULL;
+				error("invalid input map2\n");
 				break ;
 			}
 		}

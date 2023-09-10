@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:15:13 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/09 21:58:04 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 16:27:58 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,18 @@ void	check_direction(char *line, t_game *game, int *count)
 		check_extension(new_line);
 	}
 	//중복 검사
+	printf("line %s", line);
 	//check_overlap_direction(&game, );
-	if (!(str_n_compare(temp[0], "NO", str_length(temp[0]))) && temp_string == 2)
+	if (!(str_n_compare(temp[0], "NO", str_length(temp[0]))) && temp_string == 2 && !(game->img->img_no_name))
 		put_img(count, game, new_line, NO);
-	else if (!(str_n_compare(temp[0], "SO", str_length(temp[0]))) && temp_string == 2)
+	else if (!(str_n_compare(temp[0], "SO", str_length(temp[0]))) && temp_string == 2 && !(game->img->img_so_name))
 		put_img(count, game, new_line, SO);
-	else if (!(str_n_compare(temp[0], "WE", str_length(temp[0]))) && temp_string == 2)
+	else if (!(str_n_compare(temp[0], "WE", str_length(temp[0]))) && temp_string == 2 && !(game->img->img_we_name))
 		put_img(count, game, new_line, EA);
-	else if (!(str_n_compare(temp[0], "EA", str_length(temp[0]))) && temp_string == 2)
+	else if (!(str_n_compare(temp[0], "EA", str_length(temp[0]))) && temp_string == 2 && !(game->img->img_ea_name))
 		put_img(count, game, new_line, WE);
 	else
-		error("direction Error\n");
+		error("direction Error2\n");
 	char_two_free(temp);
 	free(new_line);
 }

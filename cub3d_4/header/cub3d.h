@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 01:57:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/09 22:04:00 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 16:46:48 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef struct s_img
 	void	*img_ea;
 	char	*img_ea_name;
 	int		ceil[3];
+	int		ceil_flag;
 	int		floor[3];
+	int		floor_flag;
 }	t_img;
 
 typedef struct s_game
@@ -73,7 +75,7 @@ int	only_space(char *map);
 //cub3d_rgb.c
 void	check_rgb_invalid(char *temp);
 void	check_color(char **temp_split, int *array);
-void	input_rgb(char *temp, int *count, int *array);
+void	input_rgb(char *temp, int *count, int *array, int *check);
 void	check_rgb(char *line, t_game *game, int *count);
 
 //cub3d.c

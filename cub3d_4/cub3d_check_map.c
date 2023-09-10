@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:06:20 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:48 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/10 16:03:12 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	check_map(t_game *game)
 	one_copy = middle_new_line_check(game->map + location);
 	map_copy = split_string(one_copy, '\n');
 	if (map_copy == (void *)0)
-		error('map two error\n');
+		error("map two error\n");
 	//2차원배열에 각각 넣어줌 -> 0으로 부터 주변에 공백, 널이 있는지 검사
 	
 	// int i = 0;
