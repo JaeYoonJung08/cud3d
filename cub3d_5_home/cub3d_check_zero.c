@@ -53,7 +53,7 @@ void	check_zero(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] = 'W' || map[i][j] == 'E')
+			if (map[i][j] == '0')
 				ensw_diagonal_check(map, i, j);
 			j++;
 		}

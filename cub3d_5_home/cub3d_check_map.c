@@ -83,14 +83,12 @@ void	check_map(t_game *game)
 
 	hei = 0;
 	//player가 2이상 있을 때  에러
-	if (game->player_count >= 2 || game->player_count == 0)
+	if (game->player_count >= 2)
 		error("play_direction error\n");
 	//연속으로 개행있는지 체크
 	location = first_new_line_delete(game->map);
 	one_copy = middle_new_line_check(game->map + location);
 	map_copy = split_string(one_copy, '\n');
-	if (map_copy == (void *)0)
-		error('map two error\n');
 	//2차원배열에 각각 넣어줌 -> 0으로 부터 주변에 공백, 널이 있는지 검사
 	
 	// int i = 0;

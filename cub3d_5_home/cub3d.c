@@ -77,9 +77,6 @@ int	main(int argc, char **argv)
 	init_game(&game, argv[1]);
 	//4. gnl
 	read_map(&game);
-	//빈 파일 검사
-	if (game->map == (void *)0)
-		error ("map error\n");
 	//5.맵 유효성 검사
 	check_map(&game);
 	printf("dEBN\n");
@@ -87,11 +84,11 @@ int	main(int argc, char **argv)
 	check_overlap(&game);
 
 	//해야될 일 
-	//1. 빈 파일, 빈 map 일 때 세그 고치기                   (o) cub3d.c, cub3d_check_map.c if문 추가 	if (map_copy == (void *)0)
-	//2. 캐릭터 없을 때 -- ?								(o) cub3d_check_map -> if문에 추가 if (player_count == 0)
-	//3. 캐릭터 주위 검사 추가하기							(o) cub3d_check_zero -> if문 추가 
-	//4. 캐릭터가 두 개 이상 들어올 때						(o)
-	//5. cun에서 똑같은 거 2개 들어오면 터짐				()
+	//1. 빈 파일, 빈 map 일 때 세그 고치기
+	//2. 캐릭터 없을 때 -- ?
+	//3. 캐릭터 주위 검사 추가하기
+	//4. 캐릭터가 두 개 이상 들어올 때
+	//5. cun에서 똑같은 거 2개 들어오면 터짐
 
 	// printf("player : %d\n",game.player_count);
 	// for (int i = 0; i < 3; i++)
