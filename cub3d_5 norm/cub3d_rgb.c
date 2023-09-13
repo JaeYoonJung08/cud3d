@@ -6,14 +6,14 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 22:57:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/10 16:46:38 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:45:48 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
 
 // ','과 숫자들이 잘 들어왔는지 검사
-void	check_rgb_invalid(char *temp)
+static void	check_rgb_invalid(char *temp)
 {
 	int		i;
 
@@ -28,7 +28,7 @@ void	check_rgb_invalid(char *temp)
 }
 
 //들어온 rgb가 잘 맞게 들어왔는지 검사하고 atoi
-void	check_color(char **temp_split, int *array)
+static void	check_color(char **temp_split, int *array)
 {
 	int	temp_string;
 
@@ -46,7 +46,7 @@ void	check_color(char **temp_split, int *array)
 }
 
 //rgb ,와 숫자인지 검사 한 후 rgb 값 넣어주기
-void	input_rgb(char *temp, int *count, int *array, int *check)
+static void	input_rgb(char *temp, int *count, int *array, int *check)
 {
 	char	**comma_split;
 	int		comma;

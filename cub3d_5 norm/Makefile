@@ -6,7 +6,7 @@
 #    By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 19:21:21 by jaeyojun          #+#    #+#              #
-#    Updated: 2023/09/09 22:02:32 by jaeyojun         ###   ########seoul.kr   #
+#    Updated: 2023/09/13 17:17:31 by jaeyojun         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 SRCS = cub3d.c cub3d_error_free.c cub3d_read_map.c cub3d_direction.c cub3d_rgb.c\
 		cub3d_check_map.c cub3d_check_wall.c cub3d_check_zero.c cub3d_check_overlap.c\
-		str/str.c str/split.c
+		str/str.c str/split.c str/str2.c\
+
 OBJS = $(SRCS:.c=.o) $(GNL:.c=.o)
 
 all : $(NAME)

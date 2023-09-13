@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:03:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/10 16:22:25 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:45:17 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	line_string_count(char *line)
 	return (i);
 }
 
-int	check_line(char *line, int line_len, t_game *game)
+static int	check_line(char *line, int line_len, t_game *game)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ int	check_line(char *line, int line_len, t_game *game)
 	return (1);
 }
 
-void	check_dir_rgb(char *line, t_game *game, int *count)
+static void	check_dir_rgb(char *line, t_game *game, int *count)
 {
 	char	**temp;
 
@@ -80,54 +80,21 @@ void	check_dir_rgb(char *line, t_game *game, int *count)
 	char_two_free(temp);
 }
 
-//공백만 있으면 에러인데.. 
-int	check_space(char *line)
+static int	map_check(char **line, char **map_buf, t_game *game)
 {
-	const char	tmp[7] = {
-		'0',
-		'1',
-		'N',
-		'S',
-		'W',
-		'E',
-		' ',
-	};
-	int			i;
-	int			j;
-
-	i = -1;
-	if (line[0] == '\0')
-		return (free(line), 1);
-	while (line[++i])
+	if (check_line(*line, str_length(*line), game) == 1)
 	{
-		j = 0;
-		while (j < 7)
-		{
-			if (line[i] == tmp[j])
-				return (free(line), 1);
-			j++;
-		}
-	}
-	return (free(line), error("Error\n"), 0);
-}
-
-int	map_check(char *line, char *map_buf, t_game *game)
-{
-	if (check_line(line, str_length(line), game) == 1)
-	{
-		map_buf = ft_strjoin(map_buf, line, \
-		str_length(line), str_length(map_buf));
+		*map_buf = ft_strjoin(*map_buf, *line, \
+		str_length(*line), str_length(*map_buf));
 		return (0);
 	}
 	else
 	{
-		free(map_buf);
-		free(line);
-		map_buf = NULL;
-		line = NULL;
+		free(*map_buf);
+		free(*line);
+		*map_buf = NULL;
+		*line = NULL;
 		return (1);
-		// error("invalid input map2\n");
-		// break ;
 	}
 }
 
@@ -148,7 +115,7 @@ void	read_map(t_game *game)
 		if (count <= 5)
 			check_dir_rgb(line, game, &count);
 		else
-			if (map_check(line, map_buf, game) == 1)
+			if (map_check(&line, &map_buf, game) == 1)
 				error("invalid input map2\n");
 		free(line);
 		line = NULL;

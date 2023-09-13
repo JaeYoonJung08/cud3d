@@ -6,14 +6,14 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 18:39:23 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/10 16:03:51 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:42:37 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
 
 //널문자나 공백이 있으면 에러
-int	valid_check(char c)
+static int	valid_check(char c)
 {
 	if (c == '\0' || c == ' ')
 		return (1);
@@ -21,7 +21,7 @@ int	valid_check(char c)
 }
 
 //0주변 8개 다  검사하는 코드
-void	ensw_diagonal_check(char **map, int i, int j)
+static void	ensw_diagonal_check(char **map, int i, int j)
 {
 	if (map[i - 1] && valid_check(map[i - 1][j]))
 		error("ivalid input error\n");
@@ -53,7 +53,9 @@ void	check_zero(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (map[i][j] == '0' || map[i][j] == 'N' \
+				|| map[i][j] == 'S' || map[i][j] == 'W' \
+				|| map[i][j] == 'E')
 				ensw_diagonal_check(map, i, j);
 			j++;
 		}

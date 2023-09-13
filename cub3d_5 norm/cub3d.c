@@ -6,13 +6,13 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:14:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/10 16:31:50 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:47:33 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
 
-int	check_argv(char *argv)
+static int	check_argv(char *argv)
 {
 	int	string;
 
@@ -25,7 +25,7 @@ int	check_argv(char *argv)
 	return (0);
 }
 
-void	init_game(t_game *game, char *file)
+static void	init_game(t_game *game, char *file)
 {
 	game->map = NULL;
 	game->map_copy = NULL;

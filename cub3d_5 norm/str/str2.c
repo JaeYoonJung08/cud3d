@@ -6,13 +6,13 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 19:08:53 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/06 20:26:23 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:18:43 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
 
-char	*ft_strdup(const char *string)
+char	*copy_string(const char *string)
 {
 	char	*temp;
 	int		i;
@@ -30,4 +30,24 @@ char	*ft_strdup(const char *string)
 	}
 	temp[i] = '\0';
 	return (temp);
+}
+
+char	*no_new_line(char *line)
+{
+	int		i;
+	char	*no_newline;
+
+	if (!line)
+		return (NULL);
+	no_newline = (char *)malloc(sizeof(char) * (str_length(line)));
+	i = 0;
+	while (line[i])
+	{
+		no_newline[i] = line[i];
+		if (line[i] == '\n')
+			break ;
+		i++;
+	}
+	no_newline[i] = '\0';
+	return (no_newline);
 }

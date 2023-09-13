@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/05 20:59:40 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:36:06 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ char	*ft_strjoin(char *s1, char *s2, int s2_len, int count)
 	temp[count + i] = '\0';
 	free(s1);
 	s1 = NULL;
-	//printf("temp : %s\n", temp);
-	//exit(1);
 	return (temp);
 }
 

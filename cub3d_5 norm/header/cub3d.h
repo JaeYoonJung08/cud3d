@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 01:57:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/10 16:46:48 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:47:50 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,20 @@ typedef struct s_game
 	void		*mlx_win;
 }	t_game;
 
-char	*no_new_line(char *line);
+//cud3d_check.map.c
+void	check_map(t_game *game);
+
+//cub3d_overlap.c
+void	check_overlap(t_game *game);
+
+//cub3d_check_wall.c
+void	check_wall(char **map);
+int		only_space(char *map);
+
+//cub_3d_check_zero.c
+void	check_zero(char **map);
 
 //cub3d_direction.c
-void	put_img(int *count, t_game *game, char *temp, int flag);
 void	check_direction(char *line, t_game *game, int *count);
 
 //cub3d_error_free.c
@@ -69,18 +79,10 @@ char	**char_two_free(char **word);
 
 //cub3d_read_map.c
 int		line_string_count(char *line);
-int		check_line(char *line, int line_len, t_game *game);
 void	read_map(t_game *game);
-int	only_space(char *map);
-//cub3d_rgb.c
-void	check_rgb_invalid(char *temp);
-void	check_color(char **temp_split, int *array);
-void	input_rgb(char *temp, int *count, int *array, int *check);
-void	check_rgb(char *line, t_game *game, int *count);
 
-//cub3d.c
-void	init_game(t_game *game, char *file);
-int		check_argv(char *argv);
+//cub3d_rgb.c
+void	check_rgb(char *line, t_game *game, int *count);
 
 //str/split.c
 char	**split_string(char const *s, char c);
@@ -91,12 +93,8 @@ int		str_n_compare(const char *str1, const char *str2, size_t n);
 long	atoi_while(char *str);
 int		int_atoi(char *str);
 
-void	check_overlap(t_game *game);
+//str/str2.c
+char	*no_new_line(char *line);
+char	*copy_string(const char *string);
 
-void	check_map(t_game *game);
-
-void	check_zero(char **map);
-void	check_wall(char **map);
-int		strend_line_check(char *map);
-void	startend_one_check(char *map);
 #endif

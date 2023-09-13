@@ -6,21 +6,21 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 22:00:41 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/09 22:03:47 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/13 17:39:18 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
 
-void	overlap_direction(char *file1, char *file2)
+static void	overlap_direction(char *file1, char *file2)
 {
 	if (!(str_n_compare(file1, file2, str_length(file2))))
 		error("overlap string error\n");
 }
 
-void	overlap_rgb(t_game *game)
+static void	overlap_rgb(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 3)
