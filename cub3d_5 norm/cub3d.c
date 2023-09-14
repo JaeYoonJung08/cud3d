@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:14:50 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/13 17:47:33 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/14 10:50:51 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	init_game(t_game *game, char *file)
 	game->map = NULL;
 	game->map_copy = NULL;
 	game->height = 0;
-	game->width = 0;
 	game->player_count = 0;
 	game->fd = open(file, O_RDONLY);
 	if (game->fd < 0)
@@ -52,16 +51,15 @@ static void	init_game(t_game *game, char *file)
 		error("mlx error\n");
 }
 
-void	check(void)
-{
-	system("leaks cub3d");
-}
+// void	check(void)
+// {
+// 	system("leaks cub3d");
+// }
 
 int	main(int argc, char **argv)
 {
 	t_game		game;
 
-	atexit(check);
 	if (argc != 2)
 		error("Error\n");
 	if (!(check_argv(argv[1])))
