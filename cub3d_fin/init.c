@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:58:46 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/15 16:36:51 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/15 18:46:45 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,8 @@ static char	find_location(t_game *game, char location, int i, int j)
 	}
 	else
 		return (0);
-	game->player->pos_x = j + 0.5;
-	game->player->pos_y = i + 0.5;
-	game->player->plane_x = 0;
-	game->player->dir_y = 0;
-	return (1);
+	return (game->player->pos_x = j + 0.5, game->player->pos_y = i + 0.5, \
+		game->player->plane_x = 0, game->player->dir_y = 0, 1);
 }
 
 void	init_player(t_game *game)

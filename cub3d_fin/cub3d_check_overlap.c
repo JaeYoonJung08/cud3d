@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_check_overlap.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: naki <naki@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 22:00:41 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/13 17:39:18 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/15 18:06:26 by naki             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ void	check_overlap(t_game *game)
 {
 	int		i;
 	int		j;
-	char	**temp;
+	char	*temp[5];
 
 	i = -1;
-	temp = (char **)malloc(sizeof(char *) * 5);
 	temp[0] = game->img->img_no_name;
 	temp[1] = game->img->img_so_name;
 	temp[2] = game->img->img_we_name;
@@ -57,5 +56,4 @@ void	check_overlap(t_game *game)
 		}
 	}
 	overlap_rgb(game);
-	char_two_free(temp);
 }
