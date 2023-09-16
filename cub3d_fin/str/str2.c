@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 19:08:53 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/13 17:18:43 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/16 17:06:44 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*no_new_line(char *line)
 
 	if (!line)
 		return (NULL);
-	no_newline = (char *)malloc(sizeof(char) * (str_length(line)));
+	no_newline = (char *)malloc(sizeof(char) * (str_length(line) + 1));
 	i = 0;
 	while (line[i])
 	{

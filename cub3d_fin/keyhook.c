@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: naki <naki@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 15:29:12 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/15 18:51:19 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/09/16 16:52:23 by naki             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,85 +14,71 @@
 
 int	exit_hook(t_game *game)
 {
-	// mlx_destroy_image(game->mlx, game->img_info->img);
 	mlx_destroy_window(game->mlx, game->win);
 	exit(0);
 }
 
 void	move_ver(int dir, t_game *game)
 {
-	if (dir == FRONT)
+	double	tmp_dir_x;
+	double	tmp_dir_y;
+
+	tmp_dir_x = game->player->dir_x;
+	tmp_dir_y = game->player->dir_y;
+	if (dir == BACK)
 	{
-		if (game->map_copy[(int)(game->player->pos_x + game->player->dir_x \
-			* MOVE_SPEED)][(int)(game->player->pos_y)] != '0')
-			game->player->pos_x += game->player->dir_x * MOVE_SPEED;
-		if (game->map_copy[(int)(game->player->pos_x)][(int) \
-			(game->player->pos_y + game->player->dir_y * MOVE_SPEED)] != '0')
-			game->player->pos_y += game->player->dir_y * MOVE_SPEED;
+		tmp_dir_x *= -1;
+		tmp_dir_y *= -1;
 	}
-	else if (dir == BACK)
-	{
-		if (game->map_copy[(int)(game->player->pos_x - game->player->dir_x \
-			* MOVE_SPEED)][(int)(game->player->pos_y)] != '0')
-			game->player->pos_x -= game->player->dir_x * MOVE_SPEED;
-		if (game->map_copy[(int)(game->player->pos_x)][(int) \
-			(game->player->pos_y - game->player->dir_y * MOVE_SPEED)] != '0')
-			game->player->pos_y -= game->player->dir_y * MOVE_SPEED;
-	}
-	return ;
+	if (game->map_2d[(int)(game->player->pos_x + tmp_dir_x \
+		* MOVE_SPEED)][(int)(game->player->pos_y)] != '1')
+		game->player->pos_x += tmp_dir_x * MOVE_SPEED;
+	if (game->map_2d[(int)(game->player->pos_x)][(int) \
+		(game->player->pos_y + tmp_dir_y * MOVE_SPEED)] != '1')
+		game->player->pos_y += tmp_dir_y * MOVE_SPEED;
 }
 
 void	move_hor(int dir, t_game *game)
 {
-	int	tmpdir_x;
-	int	tmpdir_y;
-	(void)dir;
-
-	tmpdir_x = game->player->pos_x * cos(M_PI / 2) - \
-		game->player->pos_y * sin(M_PI / 2);
-	tmpdir_y = game->player->pos_x * sin(M_PI / 2) + \
-		game->player->dir_y * cos(M_PI / 2);
-	if (game->map_copy[(int)(game->player->pos_y)] \
-		[(int)(game->player->pos_x - tmpdir_x * MOVE_SPEED)] == '0')
-		game->player->pos_x -= tmpdir_x * MOVE_SPEED;
-	if (game->map_copy[(int)(game->player->pos_y + tmpdir_y * MOVE_SPEED)] \
-		[(int)(game->player->pos_x)] == '0')
-		game->player->pos_y += tmpdir_y * MOVE_SPEED;
-	return ;
+	if (dir == LEFT)
+	{
+		if (game->map_2d[(int)(game->player->pos_x - game->player->plane_x \
+			* MOVE_SPEED)][(int)(game->player->pos_y)] != '1')
+			game->player->pos_x -= game->player->plane_x * MOVE_SPEED;
+		if (game->map_2d[(int)(game->player->pos_x)][(int) \
+			(game->player->pos_y - game->player->plane_y * MOVE_SPEED)] != '1')
+			game->player->pos_y -= game->player->plane_y * MOVE_SPEED;
+	}
+	else if (dir == RIGHT)
+	{
+		if (game->map_2d[(int)(game->player->pos_x + game->player->plane_x \
+			* MOVE_SPEED)][(int)(game->player->pos_y)] != '1')
+			game->player->pos_x += game->player->plane_x * MOVE_SPEED;
+		if (game->map_2d[(int)(game->player->pos_x)][(int) \
+			(game->player->pos_y + game->player->plane_y * MOVE_SPEED)] != '1')
+			game->player->pos_y += game->player->plane_y * MOVE_SPEED;
+	}
 }
 
 void	move_cam(int dir, t_game *game)
 {
 	double	olddir_x;
 	double	oldplane_x;
+	double	tmp_rot_speed;
 
-	if (dir == LEFT)
-	{
-		olddir_x = game->player->dir_x;
-		game->player->dir_x = game->player->dir_x * cos(ROT_SPEED) - \
-			game->player->dir_y * sin(ROT_SPEED);
-		game->player->dir_y = olddir_x * sin(ROT_SPEED) + \
-			game->player->dir_y * cos(ROT_SPEED);
-		oldplane_x = game->player->plane_x;
-		game->player->plane_x = game->player->plane_x * cos(ROT_SPEED) - \
-			game->player->plane_y * sin(ROT_SPEED);
-		game->player->plane_y = oldplane_x * sin(ROT_SPEED) + \
-		game->player->plane_y * cos(ROT_SPEED);
-	}
-	else if (dir == RIGHT)
-	{
-		olddir_x = game->player->dir_x;
-		game->player->dir_x = game->player->dir_x * cos(-ROT_SPEED) - \
-			game->player->dir_y * sin(-ROT_SPEED);
-		game->player->dir_y = olddir_x * sin(-ROT_SPEED) + \
-			game->player->dir_y * cos(-ROT_SPEED);
-		oldplane_x = game->player->plane_x;
-		game->player->plane_x = game->player->plane_x * cos(-ROT_SPEED) - \
-			game->player->plane_y * sin(-ROT_SPEED);
-		game->player->plane_y = oldplane_x * sin(-ROT_SPEED) + \
-			game->player->plane_y * cos(-ROT_SPEED);
-	}
-	return ;
+	olddir_x = game->player->dir_x;
+	oldplane_x = game->player->plane_x;
+	tmp_rot_speed = ROT_SPEED;
+	if (dir == RIGHT)
+		tmp_rot_speed = -ROT_SPEED;
+	game->player->dir_x = game->player->dir_x * cos(tmp_rot_speed) - \
+		game->player->dir_y * sin(tmp_rot_speed);
+	game->player->dir_y = olddir_x * sin(tmp_rot_speed) + \
+		game->player->dir_y * cos(tmp_rot_speed);
+	game->player->plane_x = game->player->plane_x * cos(tmp_rot_speed) - \
+		game->player->plane_y * sin(tmp_rot_speed);
+	game->player->plane_y = oldplane_x * sin(tmp_rot_speed) + \
+		game->player->plane_y * cos(tmp_rot_speed);
 }
 
 int	key_hook(int keycode, t_game *game)
